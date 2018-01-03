@@ -1,6 +1,10 @@
 import React from 'react';
 import { Text, View, StyleSheet, StatusBar } from 'react-native';
 import { TabNavigator } from 'react-navigation'
+import { createStore, applyMiddleware } from 'redux'
+import logger from 'redux-logger'
+import { Provider } from 'react-redux'
+import reducer from './reducers'
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
 import { Constants } from 'expo'
 import NewDeck from './components/NewDeck'
@@ -54,13 +58,14 @@ function CardsStatusBar({ backgroundColor, ...props }) {
 }
 
 export default class App extends React.Component {
-
   render() {
     return (
-      <View style={styles.container}>
-        <CardsStatusBar backgroundColor={white} barStyle='dark-content' />
-        <Tabs />
-      </View>
+      <Provider store={createStore(reducer, applyMiddleware(logger))}>
+        <View style={styles.container}>
+          <CardsStatusBar backgroundColor={white} barStyle='dark-content' />
+          <Tabs />
+        </View>
+      </Provider>
     );
   }
 }

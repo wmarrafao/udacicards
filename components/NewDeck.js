@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
-import { saveDeckTitle } from '../utils/api'
+import { connect } from 'react-redux'
+import { addDeck } from '../actions'
+import { saveDeck } from '../utils/api'
 import { white, darkBlue } from '../utils/colors'
 
 class NewDeck extends Component {
@@ -9,16 +11,16 @@ class NewDeck extends Component {
     deckTitle: ""
   }
 
-  componentDidMount() {
-
-  }
-
   createDeck = () => {
     const { deckTitle } = this.state;
-    saveDeckTitle(deckTitle)
-    console.log(this.state.deckTitle)
-    this.setState({ deckTitle: "" })
-    console.log(this.state.deckTitle)
+    let deck = {
+      title: deckTitle,
+      questions: []
+    };
+
+    this.props.addDeck(deck)
+    saveDeck(JSON.stringify({ [deckTitle]: deck }));
+    this.setState({ deckTitle: "" });
   }
 
   render() {
@@ -40,7 +42,7 @@ class NewDeck extends Component {
             onPress={this.createDeck}
             accessibilityLabel="Tap here to create a new deck"
             style={styles.btn}>
-              <Text style={styles.btnText}>Create Deck</Text>
+            <Text style={styles.btnText}>Create Deck</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -87,5 +89,16 @@ const styles = StyleSheet.create({
   },
 });
 
+function mapStateToProps() {
+  return {
 
-export default NewDeck
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    addDeck: (deck) => dispatch(addDeck(deck)),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewDeck)

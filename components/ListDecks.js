@@ -1,19 +1,16 @@
 import React, { Component } from 'react'
-import { View, Text, ScrollView, TouchableOpacity, StyleSheet  } from 'react-native'
+import { View, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-native'
+import { connect } from 'react-redux'
+import { receiveDecks } from '../actions'
 import { fetchDecks } from '../utils/api'
 import { white, lightGray, darkBlue } from '../utils/colors'
 
 class ListDecks extends Component {
 
-  state = {
-    decks: null,
-  }
-
   componentDidMount() {
     fetchDecks().then((decks) => {
-      this.setState({ decks: JSON.parse(decks) })
+      this.props.receiveDecks(JSON.parse(decks))
     })
-
   }
 
   displayDeck = (deck) => {
@@ -21,8 +18,7 @@ class ListDecks extends Component {
   }
 
   render() {
-    const { decks } = this.state
-    console.log(decks)
+    const { decks } = this.props
 
     return (
       <View style={styles.container}>
@@ -32,7 +28,7 @@ class ListDecks extends Component {
         <View style={styles.scrollContainer}>
           <ScrollView contentContainerStyle={styles.scrollview}>
             {
-              decks !== null && Object.keys(decks).map((key) => (
+              decks != undefined && Object.keys(decks).map((key) => (
                 <TouchableOpacity key={key} style={styles.deck} onPress={(deck) => this.displayDeck(decks[key])}>
                   <Text style={styles.title}>{decks[key].title}</Text>
                   <Text style={styles.meta}>{decks[key].questions.length} cards</Text>
@@ -93,5 +89,16 @@ const styles = StyleSheet.create({
   }
 });
 
+function mapStateToProps({ decks }) {
+  return {
+    decks
+  }
+}
 
-export default ListDecks
+function mapDispatchToProps(dispatch) {
+  return {
+    receiveDecks: (decks) => dispatch(receiveDecks(decks))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ListDecks)
