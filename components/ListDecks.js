@@ -46,10 +46,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
+    backgroundColor: white,
   },
   header: {
     flex: 1,
-    backgroundColor: white,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -63,12 +63,10 @@ const styles = StyleSheet.create({
     margin: 15,
   },
   scrollview: {
-    backgroundColor: white,
     alignItems: 'stretch',
   },
   deck: {
     height: 100,
-    backgroundColor: white,
     marginLeft: 10,
     marginRight: 10,
     marginTop: 5,

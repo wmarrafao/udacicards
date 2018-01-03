@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
+import { NavigationActions } from 'react-navigation'
 import { addDeck } from '../actions'
 import { saveDeck } from '../utils/api'
 import { white, darkBlue } from '../utils/colors'
@@ -21,6 +22,7 @@ class NewDeck extends Component {
     this.props.addDeck(deck)
     saveDeck(JSON.stringify({ [deckTitle]: deck }));
     this.setState({ deckTitle: "" });
+    this.props.navigation.navigate('Home');
   }
 
   render() {

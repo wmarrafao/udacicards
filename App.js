@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View, StyleSheet, StatusBar } from 'react-native';
-import { TabNavigator } from 'react-navigation'
+import { TabNavigator, StackNavigator } from 'react-navigation'
 import { createStore, applyMiddleware } from 'redux'
 import logger from 'redux-logger'
 import { Provider } from 'react-redux'
@@ -49,6 +49,17 @@ const Tabs = TabNavigator({
   }
 )
 
+const MainNavigator = StackNavigator({
+  Home: {
+    screen: Tabs,
+    navigationOptions: {
+      headerStyle: {
+        backgroundColor: white,
+      }
+    }
+  },
+})
+
 function CardsStatusBar({ backgroundColor, ...props }) {
   return (
     <View style={{backgroundColor, height: Constants.statusBarHeight}}>
@@ -63,7 +74,7 @@ export default class App extends React.Component {
       <Provider store={createStore(reducer, applyMiddleware(logger))}>
         <View style={styles.container}>
           <CardsStatusBar backgroundColor={white} barStyle='dark-content' />
-          <Tabs />
+          <MainNavigator />
         </View>
       </Provider>
     );
