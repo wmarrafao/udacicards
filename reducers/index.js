@@ -1,6 +1,6 @@
-import { ADD_DECK, RECEIVE_DECKS } from '../actions'
+import { ADD_DECK, RECEIVE_DECKS, SET_CURRENT_DECK } from '../actions'
 
-function reducer (state = { decks: null }, action) {
+function reducer (state = { decks: null, currentDeck: null }, action) {
   const { deck, decks } = action;
   switch (action.type) {
     case ADD_DECK:
@@ -16,7 +16,12 @@ function reducer (state = { decks: null }, action) {
         ...state,
         decks: decks,
       }
-    default :
+    case SET_CURRENT_DECK:
+      return {
+        ...state,
+        currentDeck: deck,
+      }
+    default:
       return state;
   }
 }

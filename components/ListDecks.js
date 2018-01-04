@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { View, Text, ScrollView, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
-import { receiveDecks } from '../actions'
+import { NavigationActions } from 'react-navigation'
+import { receiveDecks, setCurrentDeck } from '../actions'
 import { fetchDecks } from '../utils/api'
 import DeckCard from './DeckCard'
 import { white, lightGray, darkBlue } from '../utils/colors'
@@ -16,6 +17,8 @@ class ListDecks extends Component {
 
   displayDeck = (deck) => {
     console.log(`${deck.title} pressed!`)
+    this.props.setCurrentDeck(deck);
+    this.props.navigation.navigate('DeckView');
   }
 
   render() {
@@ -48,6 +51,7 @@ const styles = StyleSheet.create({
   },
   header: {
     flex: 1,
+    marginTop: 10,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -73,7 +77,8 @@ function mapStateToProps({ decks }) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    receiveDecks: (decks) => dispatch(receiveDecks(decks))
+    receiveDecks: (decks) => dispatch(receiveDecks(decks)),
+    setCurrentDeck: (deck) => dispatch(setCurrentDeck(deck))
   }
 }
 

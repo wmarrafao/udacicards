@@ -4,12 +4,18 @@ import { connect } from 'react-redux'
 import { NavigationActions } from 'react-navigation'
 import { addDeck } from '../actions'
 import { saveDeck } from '../utils/api'
+import TextButton from './TextButton'
 import { white, darkBlue } from '../utils/colors'
 
 class NewDeck extends Component {
 
-  state = {
-    deckTitle: ""
+  constructor(props) {
+    super(props);
+    this.state = {
+      deckTitle: ""
+    }
+
+    this.createDeck = this.createDeck.bind(this);
   }
 
   createDeck = () => {
@@ -39,14 +45,11 @@ class NewDeck extends Component {
             style={styles.textInput}
           />
         </View>
-        <View>
-          <TouchableOpacity
-            onPress={this.createDeck}
-            accessibilityLabel="Tap here to create a new deck"
-            style={styles.btn}>
-            <Text style={styles.btnText}>Create Deck</Text>
-          </TouchableOpacity>
-        </View>
+        <TextButton
+          text={'Create Deck'}
+          onPress={this.createDeck}
+          styles={{ btn: styles.btn, btnText: styles.btnText }}
+        />
       </View>
     )
   }
@@ -83,7 +86,7 @@ const styles = StyleSheet.create({
     backgroundColor: darkBlue,
     borderWidth: 0.5,
     borderRadius: 10,
-    padding: 10,
+    padding: 10
   },
   btnText: {
     fontSize: 20,

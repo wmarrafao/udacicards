@@ -3,7 +3,6 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import { lightGray, darkBlue } from '../utils/colors'
 
 export default function DeckCard ({ deck, displayDeck }) {
-  console.log(deck)
   return (
     <View>
       <TouchableOpacity style={styles.deck} onPress={(d) => displayDeck(deck)}>

@@ -6,9 +6,9 @@ import logger from 'redux-logger'
 import { Provider } from 'react-redux'
 import reducer from './reducers'
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
-import { Constants } from 'expo'
 import NewDeck from './components/NewDeck'
 import ListDecks from './components/ListDecks'
+import DeckView from './components/DeckView'
 import { fetchDecks } from './utils/api'
 import { white, lightGray, darkBlue, silver, darkGray } from './utils/colors'
 
@@ -53,27 +53,26 @@ const MainNavigator = StackNavigator({
   Home: {
     screen: Tabs,
     navigationOptions: {
+
+    }
+  },
+  DeckView: {
+    screen: DeckView,
+    navigationOptions: {
+      title: 'Deck View',
       headerStyle: {
-        backgroundColor: white,
-      }
+          backgroundColor: white,
+      },
+      headerTintColor: darkBlue,
     }
   },
 })
-
-function CardsStatusBar({ backgroundColor, ...props }) {
-  return (
-    <View style={{backgroundColor, height: Constants.statusBarHeight}}>
-      <StatusBar translucent backgroundColor={backgroundColor} {...props} />
-    </View>
-  )
-}
 
 export default class App extends React.Component {
   render() {
     return (
       <Provider store={createStore(reducer, applyMiddleware(logger))}>
         <View style={styles.container}>
-          <CardsStatusBar backgroundColor={white} barStyle='dark-content' />
           <MainNavigator />
         </View>
       </Provider>
