@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { View, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-native'
+import { View, Text, ScrollView, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
 import { receiveDecks } from '../actions'
 import { fetchDecks } from '../utils/api'
+import DeckCard from './DeckCard'
 import { white, lightGray, darkBlue } from '../utils/colors'
 
 class ListDecks extends Component {
@@ -29,10 +30,7 @@ class ListDecks extends Component {
           <ScrollView contentContainerStyle={styles.scrollview}>
             {
               decks != undefined && Object.keys(decks).map((key) => (
-                <TouchableOpacity key={key} style={styles.deck} onPress={(deck) => this.displayDeck(decks[key])}>
-                  <Text style={styles.title}>{decks[key].title}</Text>
-                  <Text style={styles.meta}>{decks[key].questions.length} cards</Text>
-                </TouchableOpacity>
+                <DeckCard key={key} deck={decks[key]} displayDeck={this.displayDeck}/>
               ))
             }
           </ScrollView>
@@ -65,26 +63,6 @@ const styles = StyleSheet.create({
   scrollview: {
     alignItems: 'stretch',
   },
-  deck: {
-    height: 100,
-    marginLeft: 10,
-    marginRight: 10,
-    marginTop: 5,
-    marginBottom: 5,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 4,
-    borderWidth: 2,
-    borderColor: darkBlue,
-  },
-  title: {
-    fontSize: 32,
-    color: darkBlue
-  },
-  meta: {
-    fontSize: 15,
-    color: lightGray
-  }
 });
 
 function mapStateToProps({ decks }) {
