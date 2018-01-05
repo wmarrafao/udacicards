@@ -57,10 +57,9 @@ class ListDecks extends Component {
         <View style={styles.container}>
           <Text style={styles.meta}>{counter+1}/{numOfCards}</Text>
           <Text style={styles.question}>{prompt}</Text>
-          <Button
-            title={showAnswer === true? 'Show Question' : "Show Answer"}
-            color="#ff0000"
-            style={styles.flipBtn}
+          <TextButton
+            text={showAnswer === true? 'Show Question' : "Show Answer"}
+            styles={{ btn: { backgroundColor: white, alignItems: 'center' }, btnText: styles.flipBtn }}
             onPress={() => this.setState((state) => ({showAnswer: !state.showAnswer}))}
           />
           <View style={styles.buttons}>
@@ -104,7 +103,9 @@ const styles = StyleSheet.create({
     margin: 0,
   },
   flipBtn: {
-    fontWeight: 'bold'
+    fontSize: 15,
+    fontWeight: 'bold',
+    color: '#ff0000'
   },
   buttons: {
     alignItems: 'stretch',

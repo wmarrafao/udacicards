@@ -3,6 +3,7 @@ import { View, Text, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
 import DeckCard from './DeckCard'
 import TextButton from './TextButton'
+import { clearLocalNotification, setLocalNotification } from '../utils/notification'
 import { white, lightGray, darkBlue } from '../utils/colors'
 
 class ListDecks extends Component {
@@ -17,6 +18,8 @@ class ListDecks extends Component {
 
   startQuiz = () => {
     this.props.navigation.navigate('QuizView');
+    clearLocalNotification()
+      .then(setLocalNotification)
   }
 
   render() {
