@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, ScrollView, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
 import DeckCard from './DeckCard'
 import TextButton from './TextButton'
@@ -13,6 +13,7 @@ class ListDecks extends Component {
 
   addCard = () => {
     console.log('AddCard pressed!')
+    this.props.navigation.navigate('NewCard');
   }
 
   startQuiz = () => {

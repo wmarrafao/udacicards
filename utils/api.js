@@ -9,3 +9,7 @@ export function saveDeck(deck) {
 export function fetchDecks() {
   return AsyncStorage.getItem(DECKS_STORAGE_KEY)
 }
+
+export function addCardToDeck() {
+  
+}

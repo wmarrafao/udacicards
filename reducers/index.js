@@ -1,7 +1,7 @@
-import { ADD_DECK, RECEIVE_DECKS, SET_CURRENT_DECK } from '../actions'
+import { ADD_DECK, RECEIVE_DECKS, SET_CURRENT_DECK, ADD_CARD } from '../actions'
 
 function reducer (state = { decks: null, currentDeck: null }, action) {
-  const { deck, decks } = action;
+  const { deck, decks, card } = action;
   switch (action.type) {
     case ADD_DECK:
       return {
@@ -20,6 +20,21 @@ function reducer (state = { decks: null, currentDeck: null }, action) {
       return {
         ...state,
         currentDeck: deck,
+      }
+    case ADD_CARD:
+      return {
+        ...state,
+        decks: {
+          ...state.decks,
+          [deck.title]: {
+            ...state.decks[deck.title],
+            questions: state.decks[deck.title].questions.concat(card)
+          }
+        },
+        currentDeck: {
+          ...state.currentDeck,
+          questions: state.currentDeck.questions.concat(card)
+        }
       }
     default:
       return state;

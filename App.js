@@ -9,6 +9,7 @@ import { FontAwesome, Ionicons } from '@expo/vector-icons'
 import NewDeck from './components/NewDeck'
 import ListDecks from './components/ListDecks'
 import DeckView from './components/DeckView'
+import NewCard from './components/NewCard'
 import { fetchDecks } from './utils/api'
 import { white, lightGray, darkBlue, silver, darkGray } from './utils/colors'
 
@@ -66,6 +67,15 @@ const MainNavigator = StackNavigator({
       headerTintColor: darkBlue,
     }
   },
+  NewCard: {
+    screen: NewCard,
+    navigationOptions: {
+      headerStyle: {
+          backgroundColor: white,
+      },
+      headerTintColor: darkBlue,
+    }
+  }
 })
 
 export default class App extends React.Component {
