@@ -16,7 +16,6 @@ class ListDecks extends Component {
   }
 
   displayDeck = (deck) => {
-    console.log(`${deck.title} pressed!`)
     this.props.setCurrentDeck(deck);
     this.props.navigation.navigate('DeckView');
   }

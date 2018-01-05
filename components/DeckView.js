@@ -12,12 +12,11 @@ class ListDecks extends Component {
   }
 
   addCard = () => {
-    console.log('AddCard pressed!')
     this.props.navigation.navigate('NewCard');
   }
 
   startQuiz = () => {
-    console.log('startQuiz pressed!')
+    this.props.navigation.navigate('QuizView');
   }
 
   render() {

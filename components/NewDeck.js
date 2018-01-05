@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
 import { NavigationActions } from 'react-navigation'
-import { addDeck } from '../actions'
+import { addDeck, setCurrentDeck } from '../actions'
 import { saveDeck } from '../utils/api'
 import TextButton from './TextButton'
 import { white, darkBlue } from '../utils/colors'
@@ -25,10 +25,19 @@ class NewDeck extends Component {
       questions: []
     };
 
-    this.props.addDeck(deck)
+    this.props.addDeck(deck);
+    this.props.setCurrentDeck(deck);
     saveDeck(JSON.stringify({ [deckTitle]: deck }));
     this.setState({ deckTitle: "" });
-    this.props.navigation.navigate('Home');
+
+    const resetAction = NavigationActions.reset({
+      index: 1,
+      actions: [
+        NavigationActions.navigate({ routeName: 'Home'}),
+        NavigationActions.navigate({ routeName: 'DeckView'}),
+      ]
+    });
+    this.props.navigation.dispatch(resetAction)
   }
 
   render() {
@@ -103,6 +112,7 @@ function mapStateToProps() {
 function mapDispatchToProps(dispatch) {
   return {
     addDeck: (deck) => dispatch(addDeck(deck)),
+    setCurrentDeck: (deck) => dispatch(setCurrentDeck(deck))
   };
 }
 

@@ -10,6 +10,7 @@ import NewDeck from './components/NewDeck'
 import ListDecks from './components/ListDecks'
 import DeckView from './components/DeckView'
 import NewCard from './components/NewCard'
+import QuizView from './components/QuizView'
 import { fetchDecks } from './utils/api'
 import { white, lightGray, darkBlue, silver, darkGray } from './utils/colors'
 
@@ -69,6 +70,15 @@ const MainNavigator = StackNavigator({
   },
   NewCard: {
     screen: NewCard,
+    navigationOptions: {
+      headerStyle: {
+          backgroundColor: white,
+      },
+      headerTintColor: darkBlue,
+    }
+  },
+  QuizView: {
+    screen: QuizView,
     navigationOptions: {
       headerStyle: {
           backgroundColor: white,

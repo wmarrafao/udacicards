@@ -5,3 +5,5 @@ export const darkBlue = '#2d2f40';
 export const darkGray = '#4c4c51';
 export const darkGreen = '#213121';
 export const lightGray = '#c3cad2';
+export const green = '#0f7f12';
+export const red = '#d22a25';
