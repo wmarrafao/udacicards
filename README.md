@@ -1,3 +1,20 @@
+## UdaciCards
+
+This is the project for the final assessment for Udacity's React Native course - a flashcard study mobile app. The app allows users to create different categories of flashcards (decks), add flashcards (questions and answers) to decks, and take quizzes on the decks they have added.
+
+## Start Developing
+
+To get started developing right away:
+
+* Start the development server
+    - `cd UdaciCards`
+    - `yarn install`
+    - `yarn start`
+
+This project was tested on both Android (Nexus 5x) and iOS platforms (iPhone 6). All features, including local notifications, were working when tested.
+
+## Create React Native App
+
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
 
 Below you'll find information about performing common tasks. The most recent version of this guide is available [here](https://github.com/react-community/create-react-native-app/blob/master/react-native-scripts/template/README.md).
