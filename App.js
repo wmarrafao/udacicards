@@ -1,11 +1,12 @@
 import React from 'react';
-import { Text, View, StyleSheet, StatusBar } from 'react-native';
+import { Text, View, StyleSheet, Platform, StatusBar } from 'react-native';
 import { TabNavigator, StackNavigator } from 'react-navigation'
 import { createStore, applyMiddleware } from 'redux'
 import logger from 'redux-logger'
 import { Provider } from 'react-redux'
 import reducer from './reducers'
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
+import { Constants } from 'expo'
 import NewDeck from './components/NewDeck'
 import ListDecks from './components/ListDecks'
 import DeckView from './components/DeckView'
@@ -13,7 +14,7 @@ import NewCard from './components/NewCard'
 import QuizView from './components/QuizView'
 import { fetchDecks } from './utils/api'
 import { setLocalNotification } from './utils/notification'
-import { white, lightGray, darkBlue, silver, darkGray } from './utils/colors'
+import { white, darkBlue, midGray } from './utils/colors'
 
 const Tabs = TabNavigator({
     ListDecks: {
@@ -37,6 +38,7 @@ const Tabs = TabNavigator({
     },
     tabBarOptions: {
       activeTintColor: darkBlue,
+      inactiveTintColor: Platform.OS === 'ios' ? midGray : darkBlue,
       style: {
         height: 55,
         backgroundColor: white,
@@ -89,6 +91,14 @@ const MainNavigator = StackNavigator({
   }
 })
 
+function UdaciStatusBar({ backgroundColor, ...props }) {
+  return (
+    <View style={{backgroundColor, height: Constants.statusBarHeight}}>
+      <StatusBar backgroundColor={backgroundColor} {...props} />
+    </View>
+  )
+}
+
 export default class App extends React.Component {
 
   componentDidMount() {
@@ -99,6 +109,7 @@ export default class App extends React.Component {
     return (
       <Provider store={createStore(reducer, applyMiddleware(logger))}>
         <View style={styles.container}>
+          <UdaciStatusBar backgroundColor={white} barStyle={Platform.OS === 'ios'? 'dark-content' : 'light-content'} />
           <MainNavigator />
         </View>
       </Provider>

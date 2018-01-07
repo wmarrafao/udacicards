@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
 import { NavigationActions } from 'react-navigation'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { addDeck, setCurrentDeck } from '../actions'
 import { saveDeck } from '../utils/api'
 import TextButton from './TextButton'
@@ -42,24 +43,26 @@ class NewDeck extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.prompt}>
-          What is the title of your new deck?
-        </Text>
-        <View style={styles.inputContainer}>
-          <TextInput
-            placeholder="Deck Title"
-            value={this.state.deckTitle}
-            onChangeText={(deckTitle) => this.setState({deckTitle})}
-            style={styles.textInput}
+      <KeyboardAwareScrollView contentContainerStyle={{ flex: 1 }}>
+        <View style={styles.container}>
+          <Text style={styles.prompt}>
+            What is the title of your new deck?
+          </Text>
+          <View style={styles.inputContainer}>
+            <TextInput
+              placeholder="Deck Title"
+              value={this.state.deckTitle}
+              onChangeText={(deckTitle) => this.setState({deckTitle})}
+              style={styles.textInput}
+            />
+          </View>
+          <TextButton
+            text={'Create Deck'}
+            onPress={this.createDeck}
+            styles={{ btn: styles.btn, btnText: styles.btnText }}
           />
         </View>
-        <TextButton
-          text={'Create Deck'}
-          onPress={this.createDeck}
-          styles={{ btn: styles.btn, btnText: styles.btnText }}
-        />
-      </View>
+      </KeyboardAwareScrollView>
     )
   }
 }
