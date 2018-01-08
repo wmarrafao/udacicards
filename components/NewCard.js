@@ -43,6 +43,15 @@ class NewCard extends Component {
       answer: ""
     });
     Keyboard.dismiss();
+    
+    const resetAction = NavigationActions.reset({
+      index: 1,
+      actions: [
+        NavigationActions.navigate({ routeName: 'Home'}),
+        NavigationActions.navigate({ routeName: 'DeckView'}),
+      ]
+    });
+    this.props.navigation.dispatch(resetAction)
   }
 
   render() {

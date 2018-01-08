@@ -11,7 +11,7 @@ To get started developing right away:
     - `yarn install`
     - `yarn start`
 
-This project was tested on both Android (Nexus 5x) and iOS platforms (iPhone 6). All features, including local notifications, were working when tested.
+This project was tested on both Android 8.1 (Nexus 5x) and iOS 11.2 platforms (iPhone 6). All features, including local notifications, were working when tested.
 
 ## Create React Native App
 
